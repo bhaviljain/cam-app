@@ -6,6 +6,7 @@ let captureBtn = document.querySelector('.capture-btn')
 let recordFlag = false
 
 let recorder ;
+let chunks = [];
 
 
 let constrainst = {
@@ -20,6 +21,22 @@ navigator.mediaDevices.getUserMedia(constrainst)
 video.srcObject = stream
 
 recorder =new MediaRecorder(stream)
+
+recorder.addEventListener('start',()=>{
+    chunks = []
+    
+})
+recorder.addEventListener("dataavailable",(e)=>{
+  chunks.push(e.data)
+})
+recorder.addEventListener('stop', ()=>{
+    let blob = new Blob(chunks ,{type:"video/mp4"})
+    let videoUrl = window.URL.createObjectURL(blob)
+    let a = document.createElement('a')
+    a.href = videoUrl
+    a.download = "stream.mp4"
+    a.click()
+})
 })
 
 recordBtnCont.addEventListener("click", ()=>{
@@ -35,11 +52,46 @@ recordBtnCont.addEventListener("click", ()=>{
 
         p.innerHTML = "Recording Started"
         recordBtn.appendChild(p)
+        startTimer()
     }
     else{
         recorder.stop()
         recordBtn.classList.remove('scale-record')
-
-
+        stopTimer()
+        
     }
 })
+let timer;
+let timers = document.querySelector('.timer')
+let counter = 0
+function startTimer (){
+    timers.style.display = "flex"
+    function displayTimer (){
+   let totalSeconds = counter
+
+   let hours = Number.parseInt(totalSeconds / 3600)
+   totalSeconds = totalSeconds % 3600;
+
+   let minutes =  Number.parseInt(totalSeconds / 60)
+   totalSeconds = totalSeconds % 60;
+
+   let seconds = totalSeconds
+
+
+   hours = (hours < 10) ? `0${hours}` : hours
+   minutes = (minutes < 10) ? `0${minutes}` : minutes
+   seconds = (seconds < 10) ? `0${seconds}` : seconds
+
+  timers.innerHTML = `${hours}: ${minutes} : ${seconds}`
+   counter++;
+
+    }
+    timer = setInterval(displayTimer,1000)
+}
+
+function stopTimer (){
+clearInterval(timer)
+timers.innerHTML = "00:00:00"
+timers.style.display = "none"
+
+}

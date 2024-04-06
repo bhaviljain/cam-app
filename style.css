@@ -94,3 +94,10 @@ video{
         transform: scale(1.1);
     }
  }
+ .timer{
+    position: absolute;
+    bottom: 10rem;
+    color: red;
+    left: 1rem;
+    display: none;
+ }
