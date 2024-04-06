@@ -101,3 +101,20 @@ video{
     left: 1rem;
     display: none;
  }
+ .red{
+    animation-name: recording;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    position: absolute;
+    left: 70px;
+    bottom: 1px;
+ }
+ @keyframes recording{
+    0%{
+        transform: scale(0.5);
+    }
+    100%{
+        transform: scale(1.1);
+    }
+ }
+ 

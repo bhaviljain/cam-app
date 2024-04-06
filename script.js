@@ -65,6 +65,7 @@ let timer;
 let timers = document.querySelector('.timer')
 let counter = 0
 function startTimer (){
+  
     timers.style.display = "flex"
     function displayTimer (){
    let totalSeconds = counter
@@ -83,7 +84,14 @@ function startTimer (){
    seconds = (seconds < 10) ? `0${seconds}` : seconds
 
   timers.innerHTML = `${hours}: ${minutes} : ${seconds}`
-   counter++;
+  counter++;
+
+
+
+  let p = document.createElement('div')
+  p.setAttribute("class","red")
+  p.innerText = "🔴"
+  timers.appendChild(p)
 
     }
     timer = setInterval(displayTimer,1000)
