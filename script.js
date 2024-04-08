@@ -39,6 +39,22 @@ recorder.addEventListener('stop', ()=>{
 })
 })
 
+captureBtn.addEventListener('click',(e)=>{
+    let canvas = document.createElement("canvas")
+    canvas.height = video.videoWidth
+    canvas.width = video.videoWidth
+
+    let tool = canvas.getContext("2d")
+    tool.drawImage(video,0,0,canvas.width,canvas.height)
+
+    let imageUrl = canvas.toDataURL()
+    let a = document.createElement('a')
+    a.href = imageUrl
+    a.download = "stream.png"
+    a.click()
+})
+
+
 recordBtnCont.addEventListener("click", ()=>{
     if(!recorder) return
 
@@ -66,7 +82,7 @@ let timers = document.querySelector('.timer')
 let counter = 0
 function startTimer (){
   
-    timers.style.display = "flex"
+    timers.style.display = "block"
     function displayTimer (){
    let totalSeconds = counter
 
@@ -91,7 +107,7 @@ function startTimer (){
   let p = document.createElement('div')
   p.setAttribute("class","red")
   p.innerText = "🔴"
-  timers.appendChild(p)
+  timer.appendChild(p)
 
     }
     timer = setInterval(displayTimer,1000)
@@ -99,7 +115,7 @@ function startTimer (){
 
 function stopTimer (){
 clearInterval(timer)
-timers.innerHTML = "00:00:00"
+timers.innerText = "00:00:00"
 timers.style.display = "none"
 
 }
