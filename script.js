@@ -4,6 +4,7 @@ let recordBtn = document.querySelector('.record-btn')
 let captureBtnCont = document.querySelector('.capture-btn-cont')
 let captureBtn = document.querySelector('.capture-btn')
 let recordFlag = false
+let transparentColor = "transparent";
 
 let recorder ;
 let chunks = [];
@@ -38,7 +39,7 @@ recorder.addEventListener('stop', ()=>{
     a.click()
 })
 })
-
+//CAPTURE IMAGE
 captureBtn.addEventListener('click',(e)=>{
     let canvas = document.createElement("canvas")
     canvas.height = video.videoWidth
@@ -46,6 +47,9 @@ captureBtn.addEventListener('click',(e)=>{
 
     let tool = canvas.getContext("2d")
     tool.drawImage(video,0,0,canvas.width,canvas.height)
+
+    tool.fillStyle = transparentColor
+    tool.fillRect(0,0,canvas.width, canvas.height)
 
     let imageUrl = canvas.toDataURL()
     let a = document.createElement('a')
@@ -107,7 +111,7 @@ function startTimer (){
   let p = document.createElement('div')
   p.setAttribute("class","red")
   p.innerText = "🔴"
-  timer.appendChild(p)
+  timers.appendChild(p)
 
     }
     timer = setInterval(displayTimer,1000)
@@ -119,3 +123,12 @@ timers.innerText = "00:00:00"
 timers.style.display = "none"
 
 }
+let filterLayer = document.querySelector(".filter-layer")
+let allfilter = document.querySelectorAll('.filter')
+allfilter.forEach((filterElem)=>{ 
+    filterElem.addEventListener('click',()=>{
+        //to get the color... set color karte tab backgroundcolor left mein hota hain par get karte waqt right mein ayega
+  transparentColor = getComputedStyle(filterElem).getPropertyValue("background-color")
+  filterLayer.style.backgroundColor = transparentColor
+ })
+})
