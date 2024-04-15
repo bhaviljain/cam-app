@@ -32,11 +32,23 @@ recorder.addEventListener("dataavailable",(e)=>{
 })
 recorder.addEventListener('stop', ()=>{
     let blob = new Blob(chunks ,{type:"video/mp4"})
-    let videoUrl = window.URL.createObjectURL(blob)
-    let a = document.createElement('a')
-    a.href = videoUrl
-    a.download = "stream.mp4"
-    a.click()
+    
+    if (db) {
+        let videoID = crypto.randomUUID();
+        let dbTransaction = db.transaction("video", "readwrite");
+        let videoStore = dbTransaction.objectStore("video");
+        let videoEntry = {
+            id: videoID,
+            blobData: blob
+        }
+        videoStore.add(videoEntry);
+    }
+
+
+    // let a = document.createElement('a')
+    // a.href = videoUrl
+    // a.download = "stream.mp4"
+    // a.click()
 })
 })
 //CAPTURE IMAGE
