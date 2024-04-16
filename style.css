@@ -191,8 +191,38 @@ background-color: #9a000040;
  }
  .gallery {
     position: absolute;
-    right: 6.5rem;
+    right: 7.2rem;
     bottom: 5rem;
     /* z-index: 2; */
     cursor: pointer;
+    border: 1px solid white;
+    padding: 5px;
+}
+.gallery-text{
+    position: absolute;
+    right: 6.24rem;
+    bottom: 2rem;
+    font-size: 20px;
+    /* z-index: 2; */
+    cursor: pointer;
+    color: red;
+    font-weight: 900;
+}
+.record-text{
+    position: absolute;
+    right: 6.1rem;
+    bottom: 23.3rem;
+    /* z-index: 2; */
+    cursor: pointer;
+    color: red;
+    font-weight: 900;
+}
+.capture-text{
+    position: absolute;
+    right: 6.1rem;
+    bottom: 13.3rem;
+    /* z-index: 2; */
+    cursor: pointer;
+    color: whitesmoke;
+    font-weight: 900;
 }

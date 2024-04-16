@@ -5,6 +5,7 @@ let captureBtnCont = document.querySelector('.capture-btn-cont')
 let captureBtn = document.querySelector('.capture-btn')
 let recordFlag = false
 let transparentColor = "transparent";
+let audioClass = document.querySelector('.audioClass')
 
 let recorder ;
 let chunks = [];
@@ -53,6 +54,8 @@ recorder.addEventListener('stop', ()=>{
 })
 //CAPTURE IMAGE
 captureBtn.addEventListener('click',(e)=>{
+    let audioclass = document.querySelector('.audioclass')
+
     captureBtn.classList.add('scale-record')
     let canvas = document.createElement("canvas")
     canvas.height = video.videoWidth
@@ -103,6 +106,7 @@ recordBtnCont.addEventListener("click", ()=>{
         p.innerHTML = "Recording Started"
         recordBtn.appendChild(p)
         startTimer()
+        
     }
     else{
         recorder.stop()
