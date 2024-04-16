@@ -184,3 +184,15 @@ background-color: #9a000040;
     /* background-color: #9a000040; */
 
  }
+ .material-icons{
+    color: white;
+    
+
+ }
+ .gallery {
+    position: absolute;
+    right: 6.5rem;
+    bottom: 5rem;
+    /* z-index: 2; */
+    cursor: pointer;
+}

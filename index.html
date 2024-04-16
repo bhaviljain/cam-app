@@ -6,6 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
 
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <title>Camera App</title>
 </head>
 <body>
@@ -17,6 +19,7 @@
             <div class="record-btn"></div>
         </div>
         <div class="capture-btn-cont">
+            <audio src="mixkit-camera-long-shutter-1431.wav" class="audioclass"></audio>
             <div class="capture-btn"></div>
         </div>
     </div>
@@ -54,12 +57,22 @@
   <div class="filter-layer">
 
   </div>
+  <span class="material-icons gallery">
+    collections
+</span>
 
   <script src="https://unpkg.com/shortid-dist@1.0.5/dist/shortid-2.2.13.min.js"></script>
 
  <script src="db.js"></script>
  <script src="script.js"></script>
+ <script>
+    let gallery = document.querySelector('.gallery')
+    gallery.addEventListener('click',(e)=>{
+        location.assign('./gallery.html')
+    })
+ </script>
 </body>
 </html>
 <!-- scale-record -->
+<!-- http://127.0.0.1:3000/index.html -->
 <!-- http://127.0.0.1:3000/index.html -->

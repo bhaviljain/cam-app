@@ -38,7 +38,7 @@ recorder.addEventListener('stop', ()=>{
         let dbTransaction = db.transaction("video", "readwrite");
         let videoStore = dbTransaction.objectStore("video");
         let videoEntry = {
-            id: videoID,
+            id: `videoID-${videoID}`, //same id name as given in object store
             blobData: blob
         }
         videoStore.add(videoEntry);
@@ -53,6 +53,7 @@ recorder.addEventListener('stop', ()=>{
 })
 //CAPTURE IMAGE
 captureBtn.addEventListener('click',(e)=>{
+    captureBtn.classList.add('scale-record')
     let canvas = document.createElement("canvas")
     canvas.height = video.videoWidth
     canvas.width = video.videoWidth
@@ -62,12 +63,29 @@ captureBtn.addEventListener('click',(e)=>{
 
     tool.fillStyle = transparentColor
     tool.fillRect(0,0,canvas.width, canvas.height)
-
     let imageUrl = canvas.toDataURL()
-    let a = document.createElement('a')
-    a.href = imageUrl
-    a.download = "stream.png"
-    a.click()
+
+
+    if (db) {
+        let imgId = crypto.randomUUID();
+        let dbTransaction = db.transaction("image", "readwrite");
+        let imageStore = dbTransaction.objectStore("image");
+        let imageEntry = {
+            id: `imageID-${imgId}`, //same id name as given in object store
+            url: imageUrl
+        }
+        imageStore.add(imageEntry);
+    }
+
+    setTimeout(()=>{
+        captureBtn.classList.remove('scale-record')
+
+    },500)
+
+    // let a = document.createElement('a')
+    // a.href = imageUrl
+    // a.download = "stream.png"
+    // a.click()
 })
 
 
